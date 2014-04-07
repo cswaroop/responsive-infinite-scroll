@@ -234,8 +234,29 @@ body {
   text-align: center;
   text-transform: uppercase;
 }
-.infinity-16-columns .column {
+#infiniteScrollList.a16columns .column {
   width: 6.25%;
+}
+#infiniteScrollList.a16columns .column .pod {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+#infiniteScrollList.a16columns .column .pod .id {
+  position: inherit;
+  top: 0;
+  right: 0;
+  padding: 0;
+  width: 100%;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+#infiniteScrollList.a16columns .column .pod h3 {
+  display: none;
+}
+#infiniteScrollList.a16columns .column .pod .desc {
+  font-size: 6px;
 }
 @media (max-width: 980px) {
   body {

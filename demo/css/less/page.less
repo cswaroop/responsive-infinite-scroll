@@ -79,6 +79,7 @@ body {
         .clearfix();
 
         width: 33.33%;
+
         float: left;
         .pod {
             margin: 10px 5px;
@@ -101,7 +102,6 @@ body {
             }
             h3 {
                 margin: 0 10px 5px 0;
-                font-size: 24px;
                 .font-title(24px);
             }
             .desc {
@@ -139,6 +139,7 @@ body {
     }
 }
 
+//special content
 #infiniteScrollList {
     .first-column-holder {
         float: left;
@@ -172,10 +173,28 @@ body {
     }
 }
 
-.infinity-16-columns {
+//16 columns
+#infiniteScrollList.a16columns {
     .column {
         width: (100% / 16);
-    }   
+        .pod {
+            .border-radius(0px);
+            .id {
+                position: inherit;
+                top: 0;
+                right: 0;
+                padding: 0;
+                width: 100%;
+                .border-radius(0);
+            }
+            h3 {
+                display: none;
+            }
+            .desc {
+                font-size: 6px;
+            }
+        }   
+    }
 }
 
 //responsive

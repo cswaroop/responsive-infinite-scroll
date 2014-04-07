@@ -6,13 +6,21 @@ var ScrollView = Backbone.View.extend({
     columns: [],
     itemCount: -1,
     initialize: function(opts) {
-
+        var self = this;
         this.options = opts.options;
 
+        //initial column fetching
         this.fetchColumns();
-        this.addMoreItems();
 
-        var self = this;
+        //initial data loading
+        var initialLoadingCallback = function(hasMore) {
+            //is the window full loaded?
+            if (hasMore && self.$el.outerHeight() < $(window).height()) {
+                self.addMoreItems(initialLoadingCallback);
+            }
+        };
+
+        this.addMoreItems(initialLoadingCallback);
 
         //on scroll page - load more data
         if (this.options.disableAutoscroll !== true) {
@@ -39,9 +47,11 @@ var ScrollView = Backbone.View.extend({
         };
     },
     events: {
-        "click .btn-more": "addMoreItems" //it's a fallback, the link above the scroll area -  when auto-scroll detection is broken
+        "click .btn-more": function() {
+            this.addMoreItems();  //it's a fallback, the link above the scroll area -  when auto-scroll detection is broken
+        }
     },
-    fetchColumns: function() {
+    fetchColumns: function(onFetched) {
         var self = this;
 
         var $columns = $(this.options.columnsSelector + ":visible");
@@ -63,6 +73,11 @@ var ScrollView = Backbone.View.extend({
             if (doResetItems) {
                 self.resetItems();
             }
+        } else {
+            if (onFetched) {
+                onFetched();
+            }
+            ;
         }
     },
     resetItems: function() {
@@ -109,7 +124,7 @@ var ScrollView = Backbone.View.extend({
         return $shortenColumn;
     },
     gettingMore: false, //lock if it's rendering now 
-    addMoreItems: function() {
+    addMoreItems: function(onDone) {
         var self = this;
 
         if (this.gettingMore === true) {
@@ -121,17 +136,19 @@ var ScrollView = Backbone.View.extend({
         if (!this.model.hasMore()) {
             this.$el.find(".btn-more, .load-state").hide();
             this.$el.find(".no-more-state").show();
-
+            if (onDone) {
+                onDone(false);
+            }
         } else {
             this.$el.find(".btn-more, .no-more-state").hide();
             this.$el.find(".load-state").show();
 
             this.model.getMore(function(items) {
-                self.renderItems(items);
+                self.renderItems(items, onDone);
             });
         }
     },
-    renderItems: function(itemsData) {
+    renderItems: function(itemsData, onDone) {
         var self = this;
 
         var templateSrc = self.$el.find(this.options.itemTemplateSelector).html();
@@ -173,7 +190,7 @@ var ScrollView = Backbone.View.extend({
             if (typeof self.options.onAddItem !== 'undefined') {
                 callbackResult = self.options.onAddItem(self.itemCount, shortenColumn, $item, itemData);
             }
-            
+
             if (callbackResult === false) {
                 //do nothing
             } else {
@@ -194,9 +211,15 @@ var ScrollView = Backbone.View.extend({
                 if (self.model.hasMore()) {
                     self.$el.find(".btn-more").show();
                     self.$el.find(".load-state").hide();
+                    if (onDone) {
+                        onDone(true);
+                    }
                 } else {
                     self.$el.find(".load-state").hide();
                     self.$el.find(".no-more-state").show();
+                    if (onDone) {
+                        onDone(false);
+                    }
                 }
             }
         };

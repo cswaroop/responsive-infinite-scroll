@@ -35,6 +35,7 @@
                 <li class="<?php echo ($script === "/static-data" ? "active" : "") ?>"><a href="/static-data">Offline data</a></li>
                 <li class="<?php echo ($script === "/manual-loading" ? "active" : "") ?>"><a href="/manual-loading">Manual loading</a></li>
                 <li class="<?php echo ($script === "/alternative-layout" ? "active" : "") ?>"><a href="/alternative-layout">Alternative layout</a></li>
+                <li class="<?php echo ($script === "/16-columns" ? "active" : "") ?>"><a href="/16-columns">16 columns</a></li>
                 <!-- li><a href="/16columns">16 columns</a></li -->
                 <!-- li><a href="/ads-inside">Ads inside</a></li>
                 <li><a href="/big-pod">Big first pod</a></li -->
@@ -58,11 +59,11 @@
                 case "/alternative-layout":
                     include "./demos/_alternative-layout.phtml";
                     break;
-                case "/adds-inside":
-                    include "./demos/16columns.phtml";
+                case "/16-columns":
+                    include "./demos/_16columns.phtml";
                     break;
                 case "/responsive":
-                    include "./demos/responsive.phtml";
+                    include "./demos/_responsive.phtml";
                     break;
                 default:
                     include "./demos/_basic.phtml";

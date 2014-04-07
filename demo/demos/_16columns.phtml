@@ -1,12 +1,24 @@
 <script>
     $(function() {
-        $(".infinity").summitInfinityScroll({
-            url: "/data"
-        });
+
+        var options = {
+            columnsSelector: ".column",
+            itemTemplateSelector: "#podTemplate",
+            itemClasses: "pod",
+            dataUrl: "/fake-json.php"
+        };
+
+        var scrollModel = new ScrollModel({options: options});
+        new ScrollView({el: $("#infiniteScrollList"), model: scrollModel, options: options});
+
     })
 </script>
 
-<div class="infinity infinity-16-columns">
+<!-- div class='info'>
+    The column count is always fetched. Even if it's changing by time, check also the <a href='/responsive'>responsive demo</a>.
+</div -->
+
+<div id="infiniteScrollList" class="a16columns">
     <div class="column"></div>
     <div class="column"></div>
     <div class="column"></div>
@@ -31,9 +43,9 @@
     <div class="state no-more-state">There are no more items</div>
     <div class="state load-state">Loading...</div>
 
-    <script type="text/template" class="pod-prototype">
+    <script type="text/template" id="podTemplate">
         <h3><%= title %></h3>
-        <div class="id"><%= title %></div>
+        <div class="id"><%= id %></div>
         <div class="desc"><%= desc %></div>
     </script>
 
