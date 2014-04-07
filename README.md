@@ -1,5 +1,5 @@
-Backbone Infinite Scroll
-========================
+Responsive Infinite Scroll
+==========================
 
 This is a demo case of an easy infinite scroll page layout.  
 
