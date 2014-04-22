@@ -21,7 +21,9 @@
             <div class='titles'>
                 <h1>Backbone Infinite Scroll - DEMO SITE</h1>
             </div>
-            <div class='btn-download'><a href="https://github.com/dizzyn/backbone-infinite-scroll"><button>Download Library from GitHub</button></a></div>
+            <div class='btn-download'>
+                <iframe src="http://ghbtns.com/github-btn.html?user=dizzyn&repo=responsive-infinite-scroll&type=watch&count=true&size=large" height="30" width="170" frameborder="0" scrolling="0" style="width:170px; height: 30px;" allowTransparency="true"></iframe>
+            </div>
         </div>
 
         <?php
