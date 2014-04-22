@@ -1,5 +1,9 @@
+@bgColor: #FFFFFF;
+@podBgColor: #EFF0F2;
+@podColor: #34495E;
+
 html {
-    background: #E9E9E9;
+    background: @bgColor;
 }
 
 body {
@@ -33,25 +37,28 @@ body {
 .menu {
     ul {
         margin: 0;
-        padding: 0;
+        padding: 0 0 0px;
         text-align: left;
         li {
-            padding: 5px 10px;
-            margin: 0 3px 0 0;
             display: inline-block;
             font-size: 18px;
-            .background-opacity(white, .5);
             a {
                 text-decoration: none;
                 color: darkslategrey;
+                .background-opacity(#34495E, .2);
+                display: block;
+                padding: 5px 10px;
+                margin: 0 3px 6px 0;
             }
             &:hover {
-                .background-opacity(gray, .2);
+                a {
+                    .background-opacity(#34495E, .5);
+                }
             }
             &.active {
-                background: gray;
                 a {
                     color: white;
+                    background: #34495E;
                 }
             }
         }
@@ -59,9 +66,11 @@ body {
 }
 
 .info {
-    margin: 10px 0 0px;
-    padding: 10px;
-    .background-opacity(white, 0.4);
+    clear: both;
+    margin: 10px 0px 0px;
+    padding: 10px 0; 
+    //    .border-radius(2px);
+    //    .background-opacity(gray, 0.4);
     .links {
         margin: 0;
         padding: 0;
@@ -74,6 +83,7 @@ body {
 }
 
 #infiniteScrollList {
+    width: 800px;
     .column {
         min-height: 30px;
         .clearfix();
@@ -82,23 +92,25 @@ body {
 
         float: left;
         .pod {
-            margin: 10px 5px;
-            padding: 5px;
+            margin: 15px 5px;
+            padding: 5px 25px 10px 10px;
             position: relative;
-            .border-radius(2px);
-            .box-shadow(0 0 4px rgba(0, 0, 0, .3));
-            background: white;
+            .border-radius(5px);
+            color: @podColor;
+            //   .box-shadow(0 0 4px rgba(0, 0, 0, .3));
+            background: @podBgColor;
             .id {
                 /*display: none;*/
                 position: absolute;
                 top: 0;
                 right: 0;
-                padding: 4px 8px 4px 10px;
-                .background-opacity(#ccc, .7);
+                padding: 2px 8px 2px 8px;
+                .background-opacity(#BDC3C7, .7);
+                color: @podBgColor; 
                 height: 20px;
                 line-height: 20px;
                 text-align: center;
-                .border-radius(0 0 0 50%);
+                .border-radius(0 0 0 4px);
             }
             h3 {
                 margin: 0 10px 5px 0;
@@ -110,13 +122,13 @@ body {
 
         &.column-first {
             .pod {
-                margin: 10px 5px 10px 0;
+                margin: 15px 10px 15px 0;
             }
         }
 
         &.column-third {
             .pod {
-                margin: 10px 0px 10px 5px;
+                margin: 15px 0px 15px 10px;
             }
         }
     }
@@ -151,8 +163,8 @@ body {
             font-size: 23px;
             text-transform: uppercase;
             text-align: center;
-            color: sandybrown;
-            border: 2px dotted sandybrown;
+            color: #E67E22;
+            border: 2px dotted #E67E22;
         }
         .column {
             width: 50%;
@@ -160,8 +172,8 @@ body {
     }
     .column {
         .advert {
-            color: sandybrown;
-            border: 2px dotted sandybrown;
+            color: #E67E22;
+            border: 2px dotted #E67E22;
             .box-shadow(none);
             background: inherit;
             .border-radius(0);
@@ -179,6 +191,7 @@ body {
         width: (100% / 16);
         .pod {
             .border-radius(0px);
+            padding: 4px;
             .id {
                 position: inherit;
                 top: 0;
@@ -197,15 +210,69 @@ body {
     }
 }
 
+#infiniteScrollList.responsive {
+    width: inherit;
+    .column {
+        .pod {
+        }
+    }
+}
+
 //responsive
 @media (max-width: 980px) {
     body {
-        width: 100%;
+        width: auto;
+        padding: 20px;
     }
 
-    .infinity-responsive {
+    .header {
+
+        .titles {
+            h1 {
+            }
+            h3 {
+            }
+        }
+
+        .btn-download {
+        }
+    }
+
+
+    .menu {        
+        ul {
+            margin: 0 0;
+            padding: 0 0;
+            text-align: left;
+            .clearfix();
+            li {
+                width: 50%;
+                float: left;
+                margin: 0;
+                padding: 0;
+                a {
+                    margin: 2px 5px;
+                }
+            }
+        }
+    }
+
+    .info {
+        clear: both;
+        margin: 15px 5px 0px;
+        text-align: center;
+        .links {
+            float: none;
+        }
+    }
+
+    #infiniteScrollList.responsive {
         .column {
             width: 50%;
+            .pod {
+                margin: 15px 5px;
+                padding: 5px 25px;
+            }
         }
 
         .column-third {
@@ -215,10 +282,50 @@ body {
 }
 
 @media (max-width: 450px) {
+    body {
+        padding: 4px;
+    }
 
-    .infinity-responsive {
+    .header {
+
+        .titles {
+            float: none;
+            h1 {
+                text-align: center;
+            }
+            h3 {
+                text-align: center;
+            }
+        }
+
+        .btn-download {
+            margin-top: 20px;
+            text-align: center;
+            float: none;
+        }
+    }
+
+    .menu {
+        ul {
+            li {
+                width: auto;
+                display: block;
+                float: none;
+            }
+        }
+    }
+
+    .info {
+
+    }
+
+    #infiniteScrollList.responsive {
         .column {
             width: 100%;
+            .pod {
+                margin: 15px 5px;
+                padding: 5px 25px;
+            }
         }
 
         .column-second {

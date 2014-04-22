@@ -36,10 +36,10 @@
                 <li class="<?php echo ($script === "/manual-loading" ? "active" : "") ?>"><a href="/manual-loading">Manual loading</a></li>
                 <li class="<?php echo ($script === "/alternative-layout" ? "active" : "") ?>"><a href="/alternative-layout">Alternative layout</a></li>
                 <li class="<?php echo ($script === "/16-columns" ? "active" : "") ?>"><a href="/16-columns">16 columns</a></li>
+                <li class="<?php echo ($script === "/responsive" ? "active" : "") ?>"><a href="/responsive">Responsive</a></li>
                 <!-- li><a href="/16columns">16 columns</a></li -->
                 <!-- li><a href="/ads-inside">Ads inside</a></li>
                 <li><a href="/big-pod">Big first pod</a></li -->
-                <!-- li><a href="/responsive">Responsive</a></li -->
             </ul>
         </div>
 

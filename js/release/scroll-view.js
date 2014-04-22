@@ -60,19 +60,18 @@ var ScrollView = Backbone.View.extend({
             jQuery.error("Columns are missing, please check the " + this.options.columnsSelector + ":visible selector");
         }
 
-        var doResetItems = false;
+//        var doResetItems = false;
 
         if (self.columns.length !== $columns.length) { //there is a different column size suddenly (responsive design works)
-
             self.columns = [];
 
             $columns.each(function(i, column) {
                 self.columns.push($(column));
             });
 
-            if (doResetItems) {
-                self.resetItems();
-            }
+//            if (doResetItems) {
+            self.resetItems();
+//            }
         } else {
             if (onFetched) {
                 onFetched();
@@ -83,6 +82,7 @@ var ScrollView = Backbone.View.extend({
     resetItems: function() {
         this.thereAreNoMoreItems = false;
         this.itemCount = -1;
+        this.model.reset();
 
         //clear columns
         _.each(this.columns, function($item) {

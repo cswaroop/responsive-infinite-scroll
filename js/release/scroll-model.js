@@ -11,6 +11,9 @@ var ScrollModel = Backbone.Model.extend({
     hasMore: function() {
         return this.get("noMoreItems") !== 1;
     },
+    reset: function() {
+        this.page = -1;
+    },
     requestPending: false,
     page: -1,
     getMore: function(callback) {
