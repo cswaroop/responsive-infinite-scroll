@@ -19,7 +19,8 @@
     <body>
         <div class="header">
             <div class='titles'>
-                <h1>Backbone Infinite Scroll - DEMO SITE</h1>
+                <h1>Responsive Infinite Scroll - DEMO SITE</h1>
+                <h4><a href="https://github.com/dizzyn/responsive-infinite-scroll">See the project page</a></h4>
             </div>
             <div class='btn-download'>
                 <iframe src="http://ghbtns.com/github-btn.html?user=dizzyn&repo=responsive-infinite-scroll&type=watch&count=true&size=large" height="30" width="170" frameborder="0" scrolling="0" style="width:170px; height: 30px;" allowTransparency="true"></iframe>
@@ -38,7 +39,7 @@
                 <li class="<?php echo ($script === "/manual-loading" ? "active" : "") ?>"><a href="/manual-loading">Manual loading</a></li>
                 <li class="<?php echo ($script === "/alternative-layout" ? "active" : "") ?>"><a href="/alternative-layout">Alternative layout</a></li>
                 <li class="<?php echo ($script === "/16-columns" ? "active" : "") ?>"><a href="/16-columns">16 columns</a></li>
-                <li class="<?php echo ($script === "/responsive" ? "active" : "") ?>"><a href="/responsive">Responsive</a></li>
+                <li class="<?php echo ($script === "/css-manipulation" ? "active" : "") ?>"><a href="/css-manipulation">CSS tricks</a></li>
                 <!-- li><a href="/16columns">16 columns</a></li -->
                 <!-- li><a href="/ads-inside">Ads inside</a></li>
                 <li><a href="/big-pod">Big first pod</a></li -->
@@ -64,8 +65,8 @@
                 case "/16-columns":
                     include "./demos/_16columns.phtml";
                     break;
-                case "/responsive":
-                    include "./demos/_responsive.phtml";
+                case "/css-manipulation":
+                    include "./demos/_css-manipulation.phtml";
                     break;
                 default:
                     include "./demos/_basic.phtml";

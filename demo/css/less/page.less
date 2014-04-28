@@ -1,6 +1,3 @@
-@bgColor: #FFFFFF;
-@podBgColor: #EFF0F2;
-@podColor: #34495E;
 
 html {
     background: @bgColor;
@@ -81,145 +78,9 @@ body {
         }
     }
 }
-
-#infiniteScrollList {
-    width: 800px;
-    .column {
-        min-height: 30px;
-        .clearfix();
-
-        width: 33.33%;
-
-        float: left;
-        .pod {
-            margin: 15px 5px;
-            padding: 5px 25px 10px 10px;
-            position: relative;
-            .border-radius(5px);
-            color: @podColor;
-            //   .box-shadow(0 0 4px rgba(0, 0, 0, .3));
-            background: @podBgColor;
-            .id {
-                /*display: none;*/
-                position: absolute;
-                top: 0;
-                right: 0;
-                padding: 2px 8px 2px 8px;
-                .background-opacity(#BDC3C7, .7);
-                color: @podBgColor; 
-                height: 20px;
-                line-height: 20px;
-                text-align: center;
-                .border-radius(0 5px 0 4px);
-            }
-            h3 {
-                margin: 0 10px 5px 0;
-                .font-title(24px);
-            }
-            .desc {
-            }
-        }
-
-        &.column-first {
-            .pod {
-                margin: 15px 10px 15px 0;
-            }
-        }
-
-        &.column-third {
-            .pod {
-                margin: 15px 0px 15px 10px;
-            }
-        }
-    }
-    .state {
-        clear: left;
-        text-align: center;
-    }
-    .btn-more {
-        clear: both;
-        width: 150px;
-        margin: 40px auto;
-        text-align: center;
-        padding: 10px 20px;
-        font-size: 18px;
-        cursor: pointer;
-        .background-opacity(white, .5);
-        &:hover {
-            .background-opacity(white, .7);
-        }
-    }
-}
-
-//special content
-#infiniteScrollList {
-    .first-column-holder {
-        float: left;
-        width: 66.66%;
-        .special {
-            margin: 10px 5px 0 0;
-            height: 460px;
-            line-height: 230px;
-            font-size: 23px;
-            text-transform: uppercase;
-            text-align: center;
-            color: #E67E22;
-            border: 2px dotted #E67E22;
-        }
-        .column {
-            width: 50%;
-        }
-    }
-    .column {
-        .advert {
-            color: #E67E22;
-            border: 2px dotted #E67E22;
-            .box-shadow(none);
-            background: inherit;
-            .border-radius(0);
-            height: 100px;
-            line-height: 100px;
-            text-align: center;
-            text-transform: uppercase;
-        }
-    }
-}
-
-//16 columns
-#infiniteScrollList.a16columns {
-    .column {
-        width: (100% / 16);
-        .pod {
-            .border-radius(0px);
-            padding: 4px;
-            .id {
-                position: inherit;
-                top: 0;
-                right: 0;
-                padding: 0;
-                width: 100%;
-                .border-radius(0);
-            }
-            h3 {
-                display: none;
-            }
-            .desc {
-                font-size: 6px;
-            }
-        }   
-    }
-}
-
-#infiniteScrollList.responsive {
-    width: inherit;
-    .column {
-        .pod {
-        }
-    }
-}
-
-//responsive
-@media (max-width: 980px) {
+ 
+//tablet
+@media (max-width: @widthTablet) {
     body {
         width: auto;
         padding: 20px;
@@ -238,8 +99,7 @@ body {
         }
     }
 
-
-    .menu {        
+    .menu {
         ul {
             margin: 0 0;
             padding: 0 0;
@@ -251,7 +111,6 @@ body {
                 margin: 0;
                 padding: 0;
                 a {
-                    margin: 2px 5px;
                 }
             }
         }
@@ -265,23 +124,10 @@ body {
             float: none;
         }
     }
-
-    #infiniteScrollList.responsive {
-        .column {
-            width: 50%;
-            .pod {
-                margin: 15px 5px;
-                padding: 5px 25px;
-            }
-        }
-
-        .column-third {
-            display: none;
-        }
-    }
 }
 
-@media (max-width: 450px) {
+//mobile
+@media (max-width: @widthMobile) {
     body {
         padding: 4px;
     }
@@ -317,19 +163,5 @@ body {
 
     .info {
 
-    }
-
-    #infiniteScrollList.responsive {
-        .column {
-            width: 100%;
-            .pod {
-                margin: 15px 5px;
-                padding: 5px 25px;
-            }
-        }
-
-        .column-second {
-            display: none;
-        }
     }
 }
