@@ -369,3 +369,24 @@ body {
     width: 100%;
   }
 }
+#infiniteScrollList.css-manipulation-demo .column .pod.color1 {
+  background: #d98873;
+}
+#infiniteScrollList.css-manipulation-demo .column .pod.color2 {
+  background: #0193cf;
+}
+#infiniteScrollList.css-manipulation-demo .column .pod.color3 {
+  background: #d0a92a;
+}
+#infiniteScrollList.css-manipulation-demo .column .pod.color4 {
+  background: #d34726;
+}
+#infiniteScrollList.css-manipulation-demo .column .pod.color5 {
+  background: #7ebb42;
+}
+#infiniteScrollList.css-manipulation-demo .column .pod.color6 {
+  background: #7ebb42;
+}
+#infiniteScrollList.css-manipulation-demo .column .pod.color7 {
+  background: #7ebb42;
+}

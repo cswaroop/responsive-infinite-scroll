@@ -5,7 +5,11 @@
             columnsSelector: ".column",
             itemTemplateSelector: "#podTemplate",
             itemClasses: "pod",
-            dataUrl: "/fake-json.php"
+            dataUrl: "/fake-json.php",
+            onAddItem: function(count, $column, $item, itemData) {
+                //adding random CSS class to the each .pod
+                $item.addClass("color" + (Math.floor(Math.random() * 6) + 1));
+            }
         };
 
         var scrollModel = new ScrollModel({options: options});
@@ -14,7 +18,7 @@
     });
 </script>
 
-<div id="infiniteScrollList">
+<div id="infiniteScrollList" class="css-manipulation-demo">
     <div class="column column-first"></div>
     <div class="column column-second"></div>
     <div class="column column-third"></div>
