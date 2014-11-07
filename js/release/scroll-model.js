@@ -19,9 +19,30 @@ var ScrollModel = Backbone.Model.extend({
     getMore: function(callback) {
 
         if (typeof this.options.data !== "undefined") { //local data
-            this.dataReceived(this.options.data, callback);
-            this.set("noMoreItems", 1);
-        } else if (typeof this.options.dataUrl !== "undefined") { //local data
+            var chunkSize = 10;
+            
+            var from = ++this.page * chunkSize;
+            
+            var chunk = []; //this.options.data
+            
+            for (var i = from; i < this.options.data.length; i++) {
+            
+                chunk.push(this.options.data[i]);
+                
+                if (i === this.options.data.length -1) {
+                    this.set("noMoreItems", 1);
+                    console.log("konec");
+                    break;
+                } else if (i === (from + chunkSize) - 1) {
+                    console.log("pauza");
+                    break;
+                }
+            }
+            
+            
+            this.dataReceived(chunk, callback);
+            
+        } else if (typeof this.options.dataUrl !== "undefined") { //remote data
             if (this.requestPending) {
                 return;
             } else {
