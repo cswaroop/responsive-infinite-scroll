@@ -23,8 +23,6 @@ var ScrollView = Backbone.View.extend({
         //initial column fetching
         this.fetchColumns();
 
-        this.addMoreItems(this.initialLoadingCallback);
-
         //on scroll page - load more data
         if (this.options.disableAutoscroll !== true) {
 

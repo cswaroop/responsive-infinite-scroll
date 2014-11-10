@@ -37,7 +37,6 @@ var ScrollModel = Backbone.Model.extend({
                 }
             }
             
-            
             this.dataReceived(chunk, callback);
             
         } else if (typeof this.options.dataUrl !== "undefined") { //remote data
