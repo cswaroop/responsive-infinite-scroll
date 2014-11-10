@@ -31,10 +31,8 @@ var ScrollModel = Backbone.Model.extend({
                 
                 if (i === this.options.data.length -1) {
                     this.set("noMoreItems", 1);
-                    console.log("konec");
                     break;
                 } else if (i === (from + chunkSize) - 1) {
-                    console.log("pauza");
                     break;
                 }
             }

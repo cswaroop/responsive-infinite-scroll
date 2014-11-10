@@ -5,6 +5,17 @@
 var ScrollView = Backbone.View.extend({
     columns: [],
     itemCount: -1,
+    initialLoadingCallback: function(hasMore) { //initial data loading
+        var self = this;
+
+        //is the window fully loaded?
+        if (hasMore && self.$el.outerHeight() < $(window).height()) {
+            setTimeout(function() {
+                self.addMoreItems(self.initialLoadingCallback);
+            }, 100);
+        } else {
+        }
+    },
     initialize: function(opts) {
         var self = this;
         this.options = opts.options;
@@ -12,15 +23,7 @@ var ScrollView = Backbone.View.extend({
         //initial column fetching
         this.fetchColumns();
 
-        //initial data loading
-        var initialLoadingCallback = function(hasMore) {
-            //is the window full loaded?
-            if (hasMore && self.$el.outerHeight() < $(window).height()) {
-                self.addMoreItems(initialLoadingCallback);
-            }
-        };
-
-        this.addMoreItems(initialLoadingCallback);
+        this.addMoreItems(this.initialLoadingCallback);
 
         //on scroll page - load more data
         if (this.options.disableAutoscroll !== true) {
@@ -34,7 +37,6 @@ var ScrollView = Backbone.View.extend({
             };
 
             //start of scroll event for touch devices
-
             if (document.addEventListener) {
                 document.addEventListener("touchmove", infinityScrollHandler, false);
                 document.addEventListener("scroll", infinityScrollHandler, false);
@@ -60,8 +62,6 @@ var ScrollView = Backbone.View.extend({
             jQuery.error("Columns are missing, please check the " + this.options.columnsSelector + ":visible selector");
         }
 
-//        var doResetItems = false;
-
         if (self.columns.length !== $columns.length) { //there is a different column size suddenly (responsive design works)
             self.columns = [];
 
@@ -69,14 +69,11 @@ var ScrollView = Backbone.View.extend({
                 self.columns.push($(column));
             });
 
-//            if (doResetItems) {
             self.resetItems();
-//            }
         } else {
             if (onFetched) {
                 onFetched();
             }
-            ;
         }
     },
     resetItems: function() {
@@ -89,7 +86,7 @@ var ScrollView = Backbone.View.extend({
             $item.html("");
         });
 
-        this.addMoreItems();
+        this.addMoreItems(this.initialLoadingCallback);
     },
     getShortenColumn: function() { //determine the shorten column
         var self = this;
@@ -128,6 +125,9 @@ var ScrollView = Backbone.View.extend({
         var self = this;
 
         if (this.gettingMore === true) {
+            if (onDone) {
+                onDone.call(self, true);
+            }
             return;
         } else {
             this.gettingMore = true;
@@ -136,14 +136,16 @@ var ScrollView = Backbone.View.extend({
         if (!this.model.hasMore()) {
             this.$el.find(".btn-more, .load-state").hide();
             this.$el.find(".no-more-state").show();
+            this.gettingMore = false;
             if (onDone) {
-                onDone(false);
+                onDone.call(self, false);
             }
         } else {
             this.$el.find(".btn-more, .no-more-state").hide();
             this.$el.find(".load-state").show();
 
             this.model.getMore(function(items) {
+                self.gettingMore = false;
                 self.renderItems(items, onDone);
             });
         }
@@ -212,13 +214,13 @@ var ScrollView = Backbone.View.extend({
                     self.$el.find(".btn-more").show();
                     self.$el.find(".load-state").hide();
                     if (onDone) {
-                        onDone(true);
+                        onDone.call(self, true);
                     }
                 } else {
                     self.$el.find(".load-state").hide();
                     self.$el.find(".no-more-state").show();
                     if (onDone) {
-                        onDone(false);
+                        onDone.call(self, false);
                     }
                 }
             }
