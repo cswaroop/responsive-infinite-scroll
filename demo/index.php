@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
         <!-- requirements -->
-        <script language="javascript" type="text/javascript" src="../js/requirements/jquery.js"></script>
+        <script language="javascript" type="text/javascript" src="../js/requirements/jquery-min.js"></script>
         <script language="javascript" type="text/javascript" src="../js/requirements/underscore-min.js"></script>
         <script language="javascript" type="text/javascript" src="../js/requirements/backbone-min.js"></script>
 

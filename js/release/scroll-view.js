@@ -5,18 +5,18 @@
 var ScrollView = Backbone.View.extend({
     columns: [],
     itemCount: -1,
-    initialLoadingCallback: function(hasMore) { //initial data loading
+    initialLoadingCallback: function (hasMore) { //initial data loading
         var self = this;
 
         //is the window fully loaded?
         if (hasMore && self.$el.outerHeight() < $(window).height()) {
-            setTimeout(function() {
+            setTimeout(function () {
                 self.addMoreItems(self.initialLoadingCallback);
             }, 100);
         } else {
         }
     },
-    initialize: function(opts) {
+    initialize: function (opts) {
         var self = this;
         this.options = opts.options;
 
@@ -26,7 +26,7 @@ var ScrollView = Backbone.View.extend({
         //on scroll page - load more data
         if (this.options.disableAutoscroll !== true) {
 
-            var infinityScrollHandler = function(e) {
+            var infinityScrollHandler = function (e) {
                 //is position of scroll near by end?
 
                 if (($(window).scrollTop() + $(window).height()) > ($(document).height() - $(window).height())) {
@@ -42,16 +42,27 @@ var ScrollView = Backbone.View.extend({
         }
 
         //on resize the window - check the column count (responsive behavior)
-        window.onresize = function(event) {
+        window.onresize = function (event) {
             self.fetchColumns();
         };
+
+        self.lastWidth = $("body").innerWidth();
+
+        $(window).resize(function () {
+
+            if (self.lastWidth !== $("body").innerWidth()) {
+                self.lastWidth = $("body").innerWidth();
+                self.fetchColumns();
+            }
+        });
+
     },
     events: {
-        "click .btn-more": function() {
+        "click .btn-more": function () {
             this.addMoreItems();  //it's a fallback, the link above the scroll area -  when auto-scroll detection is broken
         }
     },
-    fetchColumns: function(onFetched) {
+    fetchColumns: function (onFetched) {
         var self = this;
 
         var $columns = $(this.options.columnsSelector + ":visible");
@@ -63,7 +74,7 @@ var ScrollView = Backbone.View.extend({
         if (self.columns.length !== $columns.length) { //there is a different column size suddenly (responsive design works)
             self.columns = [];
 
-            $columns.each(function(i, column) {
+            $columns.each(function (i, column) {
                 self.columns.push($(column));
             });
 
@@ -74,22 +85,22 @@ var ScrollView = Backbone.View.extend({
             }
         }
     },
-    resetItems: function() {
+    resetItems: function () {
         this.thereAreNoMoreItems = false;
         this.itemCount = -1;
         this.model.reset();
 
         //clear columns
-        _.each(this.columns, function($item) {
+        _.each(this.columns, function ($item) {
             $item.html("");
         });
 
         this.addMoreItems(this.initialLoadingCallback);
     },
-    getShortenColumn: function() { //determine the shorten column
+    getShortenColumn: function () { //determine the shorten column
         var self = this;
 
-        var countHeight = function($column) {
+        var countHeight = function ($column) {
             var columnHeight;
 
             //call handler that allowes progammer to change the column height count (check the demos)
@@ -119,7 +130,7 @@ var ScrollView = Backbone.View.extend({
         return $shortenColumn;
     },
     gettingMore: false, //lock if it's rendering now 
-    addMoreItems: function(onDone) {
+    addMoreItems: function (onDone) {
         var self = this;
 
         if (this.gettingMore === true) {
@@ -142,13 +153,13 @@ var ScrollView = Backbone.View.extend({
             this.$el.find(".btn-more, .no-more-state").hide();
             this.$el.find(".load-state").show();
 
-            this.model.getMore(function(items) {
+            this.model.getMore(function (items) {
                 self.gettingMore = false;
                 self.renderItems(items, onDone);
             });
         }
     },
-    renderItems: function(itemsData, onDone) {
+    renderItems: function (itemsData, onDone) {
         var self = this;
 
         var templateSrc = self.$el.find(this.options.itemTemplateSelector).html();
@@ -157,7 +168,7 @@ var ScrollView = Backbone.View.extend({
             jQuery.error("Missing pod prototype (check the itemTemplateSelector: " + this.options.itemTemplateSelector + ")");
         }
 
-        var renderItem = function(i, itemsData) {
+        var renderItem = function (i, itemsData) {
 
             self.itemCount = self.itemCount + 1;
             var itemData = itemsData[i];
@@ -170,7 +181,7 @@ var ScrollView = Backbone.View.extend({
                 classesStr = self.options.itemClasses(itemData);
             }
 
-            var html = _.template(templateSrc, itemData); //item html body
+            var html = _.template(templateSrc)(itemData); //item html body
 
             //create an item DIV wrapper
             var $item = jQuery('<div/>', {
@@ -202,7 +213,7 @@ var ScrollView = Backbone.View.extend({
             }
 
             if (i < itemsData.length - 1) {
-                setTimeout(function() { //it's necessary  
+                setTimeout(function () { //it's necessary  
                     renderItem(i + 1, itemsData);
                 }, 10);
             } else {
